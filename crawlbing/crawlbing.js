@@ -1,14 +1,14 @@
 var casper = require('casper').create({
 	verbose: true,
 	logLevel:'error',
-	clientScript:["bower_components/jquery/dist/jquery.min.js","bower_components/lodash/dist/lodash.min.js"]
+	clientScripts:["../bower_components/jquery/dist/jquery.min.js","../bower_components/lodash/dist/lodash.min.js"]
 })
 
 var links = [];
 
 function getLinks(){
-	var links = document.querySelectorAll('.b_algo a');
-	return Array.prototype.map.call(links,function(e){
+	var links = $('.b_algo a');
+	return _.map(links,function(e){
 		return e.getAttribute('href');
 	});
 };
