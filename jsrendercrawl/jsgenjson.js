@@ -16,10 +16,15 @@ var url = 'http://pycoders.com/archive/';
 var link = [];
 var title = [];
 var date = [];
+var output = [];
 
-function genTable(){
-	var data;
-	return data = "<tr>\n<td>"+date.join('\n')+"</td>\n<td>"+title.join('\n')+"</td>\n<td>"+link.join('\n')+"</td>\n</tr>";
+function genJSON(){
+	output.push({
+		link:link,
+		title:title,
+		date:date
+	});
+	return JSON.stringify(output);
 }
 
 function getLinks(){
@@ -67,11 +72,7 @@ casper.then(function(){
 // });
 
 casper.run(function () {
-	 /* body... */
-	 var frag;
-	 frag += '<table><tr><td>Date</td><td>Title</td><td>link</td></tr>';
-	 frag=frag+genTable();
-	 frag+='</table>';
-	 fs.write('date.html',frag,'w');//filename, content, perm
-	 this.echo('exported.').exit();
+	var data =output;
+	fs.write('data.json',data,'w');
+	this.echo('exported json').exit();
 })
