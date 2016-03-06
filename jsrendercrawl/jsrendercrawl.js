@@ -17,6 +17,11 @@ var link = [];
 var title = [];
 var date = [];
 
+function genTable(){
+	var data;
+	return data = "<tr>\n<td>"+date.join('\n')+"</td>\n<td>"+title.join('\n')+"</td>\n<td>"+link.join('\n')+"</td>\n</tr>";
+}
+
 function getLinks(){
 	var link = $('.campaign a');
 	return _.map(link,function(e){
@@ -27,14 +32,14 @@ function getLinks(){
 function getTitle(){
 	var title = $('.campaign a');
 	return _.map(title,function(e){
-		return e.innerHTML; //innerText will print char like &nbsp;
+		return e.innerHTML.replace(/\:.*$/g,''); //innerText will print char like &nbsp;
 	})
 }
 
 function getDate(){
 	var date = $('.campaign');
 	return _.map(date,function(e){
-		return e.innerText; //innerText will print char like &nbsp;
+		return e.innerText.replace(/\-.*$/g,''); //innerText will print char like &nbsp;
 	})
 }
 
@@ -54,9 +59,19 @@ casper.then(function(){
 	date = this.evaluate(getDate);
 });
 
-casper.run(function(){
-	this.echo(links.length + 'links');
-	this.echo('-'+links.join('\n -'));
-	//this.echo('-'+title.join('\n -'));
-	this.echo('-'+date.join('\n -')).exit();
-});
+// casper.run(function(){
+// 	this.echo(links.length + 'links');
+// 	this.echo('-'+links.join('\n -'));
+// 	this.echo('-'+title.join('\n -'));
+// 	this.echo('-'+date.join('\n -')).exit();
+// });
+
+casper.run(function () {
+	 /* body... */
+	 var frag;
+	 frag += '<table><tr><td>Date</td><td>Title</td><td>link</td></tr>';
+	 frag=frag+genTable();
+	 frag+='</table>';
+	 fs.write('date.html',frag,'w');
+	 this.echo('exported.').exit();
+})
