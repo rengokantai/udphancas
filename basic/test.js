@@ -1,7 +1,7 @@
 var casper = require('casper').create();
 
-casper.start('http://en.wikipedia.org',function(){
-	this.echo('====');
+casper.start('http://www.google.es/',function(){
+	this.echo(this.getTitle());
 })
 
 casper.then(function(){
