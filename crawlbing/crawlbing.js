@@ -1,7 +1,7 @@
 var casper = require('casper').create({
 	verbose: true,
 	logLevel:'error',
-	clientScript:[]
+	clientScript:["bower_components/jquery/dist/jquery.min.js","bower_components/lodash/dist/lodash.min.js"]
 })
 
 var links = [];
@@ -28,5 +28,5 @@ casper.then(function(){
 
 casper.run(function(){
 	this.echo(links.length + 'links');
-	this.echo('-'.join('\n -')).exit();
+	this.echo('-'+links.join('\n -')).exit();
 });

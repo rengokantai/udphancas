@@ -1,0 +1,19 @@
+{
+  "name": "udcasper",
+  "version": "0.0.0",
+  "authors": [
+    "Hernan Y.Ke <yuriqiao@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "lodash": "~4.6.1",
+    "jquery": "~2.2.1"
+  }
+}
