@@ -37,9 +37,13 @@ casper.start(url,function(){
 	title = this.echo(this.getTitle());
 });
 
-casper.waitForSelector('.hotel-name',function () {
-	 console.log('test');
+casper.waitForSelector('.hotel-name');
+
+casper.then(function () {
+	 this.clickLabel('Stars (5...1)','span');
 })
+
+casper.wait(1000);
 
 casper.then(function(){
 	names = this.evaluate(getNames);
